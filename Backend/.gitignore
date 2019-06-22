@@ -1,4 +1,5 @@
 /.idea/
+/target/
 /BetterOscar.iml
 /checkstyle.bat
 /src/main/resources/config.json

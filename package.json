@@ -1,0 +1,22 @@
+{
+  "name": "betteroscar",
+  "version": "1.0.0",
+  "description": "Development setup scripts for BetterOscar",
+  "scripts": {
+    "setup": "node Scripts/devsetup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcpooley/BetterOscar.git"
+  },
+  "keywords": [],
+  "author": "rcpooley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rcpooley/BetterOscar/issues"
+  },
+  "homepage": "https://github.com/rcpooley/BetterOscar#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}

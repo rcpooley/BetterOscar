@@ -4,57 +4,57 @@ import java.util.List;
 
 public class Section {
 
-    private int id;
+  private int id;
 
-    private int crn;
+  private int crn;
 
-    private String code;
+  private String code;
 
-    private String instructor;
+  private String instructor;
 
-    private List<SectionTime> times;
+  private List<SectionTime> times;
 
-    private int capacity;
+  private int capacity;
 
-    private int remaining;
+  private int remaining;
 
-    private int waitlistCapacity;
+  private int waitlistCapacity;
 
-    private int waitlistRemaining;
+  private int waitlistRemaining;
 
-    public int getID() {
-        return id;
-    }
+  public int getID() {
+    return id;
+  }
 
-    public int getCrn() {
-        return crn;
-    }
+  public int getCrn() {
+    return crn;
+  }
 
-    public String getCode() {
-        return code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public String getInstructor() {
-        return instructor;
-    }
+  public String getInstructor() {
+    return instructor;
+  }
 
-    public List<SectionTime> getTimes() {
-        return times;
-    }
+  public List<SectionTime> getTimes() {
+    return times;
+  }
 
-    public int getCapacity() {
-        return capacity;
-    }
+  public int getCapacity() {
+    return capacity;
+  }
 
-    public int getRemaining() {
-        return remaining;
-    }
+  public int getRemaining() {
+    return remaining;
+  }
 
-    public int getWaitlistCapacity() {
-        return waitlistCapacity;
-    }
+  public int getWaitlistCapacity() {
+    return waitlistCapacity;
+  }
 
-    public int getWaitlistRemaining() {
-        return waitlistRemaining;
-    }
+  public int getWaitlistRemaining() {
+    return waitlistRemaining;
+  }
 }

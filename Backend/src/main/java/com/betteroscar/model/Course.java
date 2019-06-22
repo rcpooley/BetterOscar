@@ -4,40 +4,40 @@ import java.util.List;
 
 public class Course {
 
-    private int id;
+  private int id;
 
-    private String num;
+  private String num;
 
-    private String name;
+  private String name;
 
-    private int credits;
+  private int credits;
 
-    private String prerequisites;
+  private String prerequisites;
 
-    public int getID() {
-        return id;
-    }
+  public int getID() {
+    return id;
+  }
 
-    public String getNum() {
-        return num;
-    }
+  public String getNum() {
+    return num;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public int getCredits() {
-        return credits;
-    }
+  public int getCredits() {
+    return credits;
+  }
 
-    public String getPrerequisites() {
-        return prerequisites;
-    }
+  public String getPrerequisites() {
+    return prerequisites;
+  }
 
-    public List<Section> getSections() {
-        return sections;
-    }
+  public List<Section> getSections() {
+    return sections;
+  }
 
-    private List<Section> sections;
+  private List<Section> sections;
 
 }

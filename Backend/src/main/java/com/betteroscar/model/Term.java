@@ -4,27 +4,27 @@ import java.util.List;
 
 public class Term {
 
-    private int id;
+  private int id;
 
-    private String termID;
+  private String termID;
 
-    private String name;
+  private String name;
 
-    private List<Subject> subjects;
+  private List<Subject> subjects;
 
-    public int getID() {
-        return id;
-    }
+  public int getID() {
+    return id;
+  }
 
-    public String getTermID() {
-        return termID;
-    }
+  public String getTermID() {
+    return termID;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
+  public List<Subject> getSubjects() {
+    return subjects;
+  }
 }

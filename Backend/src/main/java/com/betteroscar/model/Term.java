@@ -10,7 +10,11 @@ public class Term {
 
   private String name;
 
-  private List<Subject> subjects;
+  public Term(int id, String termID, String name) {
+    this.id = id;
+    this.termID = termID;
+    this.name = name;
+  }
 
   public int getID() {
     return id;
@@ -25,6 +29,11 @@ public class Term {
   }
 
   public List<Subject> getSubjects() {
-    return subjects;
+    return null;
+  }
+
+  @Override
+  public String toString() {
+    return "Term {id=" + id + ", term_id=" + termID + ", name=" + name + "}";
   }
 }

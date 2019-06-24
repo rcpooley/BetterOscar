@@ -2,8 +2,8 @@ package com.betteroscar.database;
 
 import com.betteroscar.config.MysqlConfig;
 import com.betteroscar.exception.DatabaseException;
+import com.betteroscar.model.Term;
 
-import javax.xml.crypto.Data;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.betteroscar.database.Procedure.*;
 
@@ -115,10 +116,8 @@ public class Database {
     }
   }
 
-  public void test() throws DatabaseException {
+  public List<Term> getTerms() throws DatabaseException {
     List<GetTermsResult> terms = executeProcedure(GET_TERMS);
-    for (GetTermsResult term : terms) {
-      System.out.println(term.id() + " " + term.term_id() + " " + term.name());
-    }
+    return terms.stream().map(term -> new Term(term.id(), term.term_id(), term.name())).collect(Collectors.toList());
   }
 }

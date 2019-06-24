@@ -10,7 +10,6 @@ public class Test {
   public static void main(String[] args) throws ConfigException, DatabaseException {
     Config config = Config.load();
     Database db = Database.openConnection(config.mysql());
-    db.test();
+    System.out.println(db.getTerms());
   }
-
 }

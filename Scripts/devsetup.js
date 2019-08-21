@@ -4,13 +4,12 @@ const request = require("request");
 
 const URLS = {
   checkstyle:
-    "https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.21/checkstyle-8.21-all.jar",
-  googleStyle:
-    "https://raw.githubusercontent.com/checkstyle/checkstyle/master/src/main/resources/google_checks.xml"
+    "https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.23/checkstyle-8.23-all.jar"
 };
 
 const ROOT_PATH = path.join(__dirname, "..");
 const OUT_PATH = path.join(ROOT_PATH, "checkstyle");
+const STYLE_PATH = path.join(OUT_PATH, 'google_checks.xml');
 const BACKEND_PATH = path.join(ROOT_PATH, "Backend");
 
 const FILE_DEFAULTS = {
@@ -57,8 +56,12 @@ async function downloadPart(url, name) {
 function initGitignoredFiles() {
   Object.keys(FILE_DEFAULTS).forEach(file => {
     const filePath = path.join(ROOT_PATH, file);
+    console.log(`Creating ${file}`);
     if (!fs.existsSync(filePath)) {
-      console.log(`Creating ${file}`);
+      const dir = path.resolve(filePath, '..');
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, {recursive: true});
+      }
       fs.writeFileSync(filePath, FILE_DEFAULTS[file]);
     }
   });
@@ -71,11 +74,9 @@ async function main() {
 
   const checkstyleFile = await downloadPart(URLS.checkstyle, "Checkstyle");
 
-  const styleFile = await downloadPart(URLS.googleStyle, "Google Style");
-
-  const checkstyleCommand = `java -jar "${checkstyleFile}" -c="${styleFile}" "${path.join(
+  const checkstyleCommand = `java -jar "${checkstyleFile}" -c="${STYLE_PATH}" "${path.join(
     BACKEND_PATH,
-    "src"
+    "src/main"
   )}"`;
 
   const commandFileName =

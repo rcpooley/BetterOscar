@@ -10,6 +10,13 @@ public class Term {
 
   private String name;
 
+  /**
+   * Constructs a new term object.
+   *
+   * @param id The term's ID
+   * @param termID The term's GT ID
+   * @param name The term's name
+   */
   public Term(int id, String termID, String name) {
     this.id = id;
     this.termID = termID;

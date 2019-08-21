@@ -19,13 +19,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.betteroscar.database.Procedure.*;
-
 
 public class Database {
 
   private static Map<Class<?>, Method> resultSetMethods;
 
+  /**
+   * Connect to the database using the provided configuration.
+   *
+   * @param config The mysql configuration
+   * @return An active database object
+   * @throws DatabaseException If we fail to connect
+   */
   public static Database openConnection(MysqlConfig config) throws DatabaseException {
     if (resultSetMethods == null) {
       try {
@@ -78,7 +83,8 @@ public class Database {
       Method[] methods = clazz.getMethods();
       for (Method m : methods) {
         if (!columns.containsKey(m.getName())) {
-          throw new DatabaseException("Expected column `" + m.getName() + "` but was not found in result set", procedure);
+          throw new DatabaseException("Expected column `" + m.getName()
+              + "` but was not found in result set", procedure);
         }
       }
 
@@ -94,7 +100,8 @@ public class Database {
           // Validate method type
           Class<?> type = m.getReturnType();
           if (!resultSetMethods.containsKey(type)) {
-            throw new DatabaseException("Unrecognized method type for column `" + name + "`: " + type.getSimpleName(), procedure);
+            throw new DatabaseException("Unrecognized method type for column `"
+                + name + "`: " + type.getSimpleName(), procedure);
           }
 
           // Get the field value
@@ -105,7 +112,11 @@ public class Database {
 
         // Create proxy interface object
         @SuppressWarnings("unchecked")
-        T obj = (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[] {clazz}, (proxy, method, args) -> vals.get(method.getName()));
+        T obj = (T) Proxy.newProxyInstance(
+            clazz.getClassLoader(),
+            new Class[] {clazz},
+            (proxy, method, args) -> vals.get(method.getName())
+        );
 
         ret.add(obj);
       }
@@ -116,8 +127,17 @@ public class Database {
     }
   }
 
+  /**
+   * Fetches all terms from the database.
+   *
+   * @return List of terms in the database
+   * @throws DatabaseException If execution fails
+   */
   public List<Term> getTerms() throws DatabaseException {
-    List<GetTermsResult> terms = executeProcedure(GET_TERMS);
-    return terms.stream().map(term -> new Term(term.id(), term.term_id(), term.name())).collect(Collectors.toList());
+    List<GetTermsResult> terms = executeProcedure(Procedure.GET_TERMS);
+    return terms
+        .stream()
+        .map(term -> new Term(term.id(), term.term_id(), term.name()))
+        .collect(Collectors.toList());
   }
 }

@@ -7,9 +7,9 @@ import com.rcpooley.configloader.ConfigException;
 
 public class Test {
 
-  public static void main(String[] args) throws ConfigException, DatabaseException {
+  public static void main(String[] args) throws ConfigException {
     Config config = Config.load();
-    Database db = Database.openConnection(config.mysql());
-    System.out.println(db.getTerms());
+    DevDatabase db = DevDatabase.openConnection(config.mysql());
+    db.resetWithTestingData();
   }
 }

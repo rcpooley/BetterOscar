@@ -50,9 +50,12 @@ public class Database {
     resultSetMethods.put(String.class, ResultSet.class.getMethod("getString", int.class));
   }
 
+  protected MysqlConfig config;
+
   protected Connection connection;
 
   protected Database(MysqlConfig config) throws DatabaseException {
+    this.config = config;
     try {
       connection = DriverManager.getConnection(
           "jdbc:mysql://" + config.getHost() + "/" + config.getDatabase(),

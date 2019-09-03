@@ -16,6 +16,10 @@ public class DatabaseException extends Exception {
     super(getProcMessage(message, procedure), cause);
   }
 
+  public DatabaseException(String message) {
+    super(message);
+  }
+
   private static String getProcMessage(String message, Procedure procedure) {
     return message + " (Procedure: " + procedure + ")";
   }

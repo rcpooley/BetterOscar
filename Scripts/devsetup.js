@@ -12,8 +12,8 @@ const OUT_PATH = path.join(ROOT_PATH, "checkstyle");
 const STYLE_PATH = path.join(OUT_PATH, 'google_checks.xml');
 const BACKEND_PATH = path.join(ROOT_PATH, "Backend");
 
-const FILE_DEFAULTS = {
-  "Backend/src/main/resources/config.json": JSON.stringify(
+const STRINGS = {
+  defaultConfig: JSON.stringify(
     {
       mysql: {
         host: "localhost:3306",
@@ -25,6 +25,11 @@ const FILE_DEFAULTS = {
     null,
     2
   )
+}
+
+const FILE_DEFAULTS = {
+  "Backend/src/main/resources/config.json": STRINGS.defaultConfig,
+  "Backend/src/test/resources/config.json": STRINGS.defaultConfig
 };
 
 function downloadFile(url, dest) {

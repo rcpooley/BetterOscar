@@ -2,6 +2,7 @@ package com.betteroscar.database;
 
 public enum Procedure {
 
+  ADD_TERM("add_term", AddTermResult.class),
   GET_TERMS("get_terms", GetTermsResult.class);
 
   private String name;
@@ -20,5 +21,4 @@ public enum Procedure {
   public Class<?> getResultClass() {
     return resultClass;
   }
-
 }

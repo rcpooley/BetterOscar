@@ -3,7 +3,6 @@ package com.betteroscar.test;
 import com.betteroscar.config.MysqlConfig;
 import com.betteroscar.database.Database;
 import com.betteroscar.exception.DatabaseException;
-import com.betteroscar.model.Term;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

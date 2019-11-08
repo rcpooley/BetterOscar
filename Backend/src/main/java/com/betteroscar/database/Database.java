@@ -67,11 +67,26 @@ public class Database {
     }
   }
 
-  private <T> List<T> executeProcedure(Procedure procedure) throws DatabaseException {
+  private String getArgumentString(Object... args) {
+    StringBuilder s = new StringBuilder();
+    for (Object o : args) {
+      if (s.length() > 0) {
+        s.append(", ");
+      }
+      if (o instanceof String) {
+        s.append("'").append(o.toString()).append("'");
+      } else {
+        throw new RuntimeException("Unknown argument type: " + o.getClass().getName());
+      }
+    }
+    return s.toString();
+  }
+
+  private <T> List<T> executeProcedure(Procedure procedure, Object... procArgs) throws DatabaseException {
     try {
       // Call the stored procedure
       Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery("CALL " + procedure.getName() + "();");
+      ResultSet rs = stmt.executeQuery("CALL " + procedure.getName() + "(" + getArgumentString(procArgs) + ");");
       ResultSetMetaData meta = rs.getMetaData();
 
       // Get mapping of column name to index
@@ -128,6 +143,14 @@ public class Database {
     } catch (SQLException | IllegalAccessException | InvocationTargetException e) {
       throw new DatabaseException("Failed to execute stored procedure", procedure, e);
     }
+  }
+
+  public Term addTerm(String termID, String name) throws DatabaseException {
+    List<AddTermResult> terms = executeProcedure(Procedure.ADD_TERM, termID, name);
+    if (terms.size() != 1) {
+      throw new DatabaseException("Invalid response received");
+    }
+    return new Term(terms.get(0).id(), termID, name);
   }
 
   /**
